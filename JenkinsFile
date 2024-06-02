@@ -36,6 +36,7 @@ pipeline {
                 sh 'terraform apply --auto-approve'
             }
         }
+        }
         stage('terraform apply') {
             when {
                 expression {deployOrDestroy == 'Deploy'}
