@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    parameters {
+        choice(choices: ['Deploy', 'Destroy'], description: 'Deploy or Destroy Infra', name:'deployOrDestroy')
+    }
     stages {
         stage('Check terraform version') {
             steps {
@@ -16,18 +18,33 @@ pipeline {
         }
         }
         stage('terraform plan') {
+            when {
+                expression {deployOrDestroy == 'Deploy'}
+            }
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh 'terraform plan'
             }
         }
         }
-        stage('terraform appy') {
+        stage('terraform apply') {
+            when {
+                expression {deployOrDestroy == 'Deploy'}
+            }
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh 'terraform apply --auto-approve'
             }
         }
+        stage('terraform apply') {
+            when {
+                expression {deployOrDestroy == 'Deploy'}
+            }
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh 'terraform apply --auto-approve'
+            }
+         }
         }
     }
 }

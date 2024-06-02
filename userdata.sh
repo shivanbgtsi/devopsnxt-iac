@@ -10,7 +10,7 @@ mvn clean install
 sudo docker build  -f Dockerfile .
 cd target
 java -jar devops-nxt-poc.jar
-
+aws ecr create-repository --repository-name devops-nxt-iac
 dnf install wget
 cd /opt/
 wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.89/bin/apache-tomcat-9.0.89.tar.gz
