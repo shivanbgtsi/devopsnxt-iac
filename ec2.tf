@@ -2,7 +2,6 @@
 resource "aws_instance" "ec2_instance" {
   ami                         = "ami-00fa32593b478ad6e"
   instance_type               = var.instance_type
-#  key_name                    = var.key_pair_name
   security_groups             = [aws_security_group.security.id]
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.subnet.id
