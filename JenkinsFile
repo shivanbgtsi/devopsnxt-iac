@@ -37,13 +37,13 @@ pipeline {
             }
         }
         }
-        stage('terraform apply') {
+        stage('terraform destroy') {
             when {
-                expression {deployOrDestroy == 'Deploy'}
+                expression {deployOrDestroy == 'Destroy'}
             }
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh 'terraform apply --auto-approve'
+                sh 'terraform destroy --auto-approve'
             }
          }
         }
