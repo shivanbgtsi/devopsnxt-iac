@@ -5,6 +5,7 @@ pipeline {
         stage('Check terraform version') {
             steps {
                 sh 'terraform -v'
+                sh 'rm -rf  .terraform*'
             }
         }
         stage('terraform init') {
