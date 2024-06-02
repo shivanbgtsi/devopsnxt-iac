@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Check terraform version') {
+            steps {
+                sh 'terraform -v'
+            }
+        }
+        stage('terraform init') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'access_key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh 'terraform init'
+            }
+        }
+        }
+        stage('terraform plan') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'access_key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh 'terraform plan'
+            }
+        }
+        }
+        stage('terraform appy') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'access_key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh 'terraform apply --auto-approve'
+            }
+        }
+        }
+    }
+}
