@@ -36,7 +36,8 @@ jobs:
         terraform -v
         terraform init
         terraform plan
-        terraform apply --auto-approve
+        # terraform apply --auto-approve
+        terraform destroy --auto-approve
      
     # - name: Check confirmation
     #   id: check_confirmation
