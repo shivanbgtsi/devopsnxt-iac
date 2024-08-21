@@ -1,0 +1,20 @@
+name: Shellspec Test for AWS SSM Parameters
+
+on:
+  push:
+    branches:
+      - shell-check-gha
+  pull_request:
+    branches:
+      - shell-check-gha
+
+jobs:
+  shellspec:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: print hello
+      run: echo "hello"
