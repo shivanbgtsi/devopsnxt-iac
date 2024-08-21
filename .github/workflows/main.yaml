@@ -36,15 +36,16 @@ jobs:
         terraform -v
         terraform init
         terraform plan
+        terraform apply
      
-    - name: Check confirmation
-      id: check_confirmation
-      run: |
-        if [ "${{ github.event.inputs.confirm }}" != "yes" ]; then
-          echo "User did not confirm. Exiting."
-          exit 1
-        fi
+    # - name: Check confirmation
+    #   id: check_confirmation
+    #   run: |
+    #     if [ "${{ github.event.inputs.confirm }}" != "yes" ]; then
+    #       echo "User did not confirm. Exiting."
+    #       exit 1
+    #     fi
 
-    - name: Terraform Plan
-      run: terraform plan
-      if: steps.check_confirmation.outcome == 'success'
+    # - name: Terraform Plan
+    #   run: terraform plan
+    #   if: steps.check_confirmation.outcome == 'success'
