@@ -3,10 +3,10 @@ name: Shellspec Test for AWS SSM Parameters
 on:
   push:
     branches:
-      - shell-check-gha
+      - master
   pull_request:
     branches:
-      - shell-check-gha
+      - master
 
 jobs:
   shellspec:
