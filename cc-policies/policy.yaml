@@ -1,0 +1,6 @@
+policies:
+  - name: test-s3-bucket-public-access
+    resource: aws.s3
+    filters:
+      - type: check-public-block
+        BlockPublicPolicy: false
