@@ -53,5 +53,5 @@ jobs:
       run: |
         cd ${{ github.workspace }}/cc-policies
         custodian run -s output --cache-period 0 --cache output/cache --region ap-south-1  policy.yaml 
-        cd output/test
+        cd output/test-s3-bucket-public-access
         cat resources.json
