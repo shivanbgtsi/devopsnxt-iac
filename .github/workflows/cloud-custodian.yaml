@@ -9,7 +9,7 @@ on:
       - cloud-custodian
 
 jobs:
-  shellspec:
+  cloud-custodian:
     runs-on: ubuntu-latest
 
     steps:
