@@ -55,3 +55,8 @@ jobs:
         custodian run -s output --cache-period 0 --cache output/cache --region ap-south-1  policy.yaml 
         cd output/test-s3-bucket-public-access
         cat resources.json
+        cd output/Unused-Elastic_IPs
+        cat resources.json
+        cd output/EC2-Instances-with-public-ips
+        cat resources.json
+        
