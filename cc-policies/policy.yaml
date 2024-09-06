@@ -1,6 +1,30 @@
+vars:
+  eip_filters: &eip_filters
+    - InstanceId: absent
+    - AssociationId: absent
+    
 policies:
   - name: test-s3-bucket-public-access
     resource: aws.s3
     filters:
       - type: check-public-block
         BlockPublicPolicy: false
+      
+  
+  - name: Unused-Elastic_IPs
+    resource: elastic-ip
+    description: "read unused elastic ips"
+    filters:
+      - "tag:maid_status_eip": absent
+      - and: *eip_filters
+
+  - name: EC2-Instances-with-public-ips
+    resource: ec2
+    description: |
+      Find all EC2 instances with public IP addresses and take action.
+    filters:
+      - type: value
+        key: PublicIpAddress
+        value: not-null
+    
+     
